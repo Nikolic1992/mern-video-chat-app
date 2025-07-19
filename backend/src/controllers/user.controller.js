@@ -129,13 +129,13 @@ export async function getFriendRequests(req, res) {
       status: "pending",
     }).populate(
       "sender",
-      "fullName profilePic nativeLanguage learningLanguage"
+      "fullName profilePicture nativeLanguage learningLanguage"
     );
 
     const acceptedReqs = await FriendRequest.find({
       sender: req.user.id,
       status: "accepted",
-    }).populate("recipient", "fullName profilePic");
+    }).populate("recipient", "fullName profilePicture");
 
     res.status(200).json({ incomingReqs, acceptedReqs });
   } catch (error) {
@@ -151,7 +151,7 @@ export async function getOutgoingFriendRequests(req, res) {
       status: "pending",
     }).populate(
       "recipient",
-      "fullName profilePic nativeLanguage learningLanguage"
+      "fullName profilePicture nativeLanguage learningLanguage"
     );
 
     res.status(200).json(outgoingRequests);
